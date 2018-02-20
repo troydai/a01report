@@ -33,6 +33,8 @@ namespace A01.Report.Models
 
         [ForeignKey("run_id")]
         public Run Run { get; set; }
+
+        public RunTaskViewModel GetViewModel() => new RunTaskViewModel(this);
     }
 
     public class RunTaskViewModel
@@ -51,6 +53,32 @@ namespace A01.Report.Models
         }
 
         public RunTask Data => _task;
+
+        public string Module
+        {
+            get
+            {
+                JToken pathToken;
+                if (!_settings.Value.TryGetValue("path", out pathToken))
+                {
+                    pathToken = _settings.Value["classifier"]["identifier"];
+                }
+
+                var path = (string)pathToken;
+                if (path.StartsWith("azure.cli.command_modules"))
+                {
+                    return path.Split('.')[3];
+                }
+                else if (path.StartsWith("azure.cli."))
+                {
+                    return path.Split('.')[2];
+                }
+                else
+                {
+                    return "N/A";
+                }
+            }
+        }
 
         public async Task<string> GetLog()
         {

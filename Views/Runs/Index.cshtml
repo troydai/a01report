@@ -16,7 +16,7 @@
       @foreach (var item in Model)
       {
           <tr>
-            <td>@Html.DisplayFor(modelItem => item.Data.Id)</td>
+            <td><a href="/r/@item.Data.Id">@Html.DisplayFor(modelItem => item.Data.Id)</a></td>
             <td>@Html.DisplayFor(modelItem => item.Data.Name)</td>
             <td>@Html.DisplayFor(modelItem => item.Data.Creation)</td>
             @if (item.IsOfficial)

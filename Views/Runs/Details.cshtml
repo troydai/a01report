@@ -10,15 +10,17 @@
     <thead>
       <tr>
         <th>Id</th>
+        <th>Module</th>
         <th>Name</th>
         <th>Result</th>
       </tr>
     </thead>
     <tbody>
-    @foreach (var task in Model.Data.Tasks.Where(t=>t.Result != "Passed"))
+    @foreach (var task in Model.Data.Tasks.Where(t=>t.Result != "Passed").OrderBy(t=>t.Name))
     {
       <tr>
         <td><a href="/t/@task.Id">@task.Id</a></td>
+        <td>@task.GetViewModel().Module</td>
         <td>@task.Name</td>
         <td>@task.Result</td>
       </tr>
