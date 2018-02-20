@@ -1,0 +1,7 @@
+@model A01.Report.Models.RunTaskViewModel
+
+<div class=container>
+    <h2>Task @Model.Data.Id</h2>
+    <p class="flow-text">@Model.Data.Name</p>
+    <pre><code>@Model.GetLog().Result</code></pre>
+</div>

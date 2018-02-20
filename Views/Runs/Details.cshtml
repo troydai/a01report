@@ -1,0 +1,28 @@
+@model A01.Report.Models.RunViewModel
+@{
+    ViewData["Title"] = "Runs";
+}
+<div class="container">
+  <h2>Run @Model.Data.Id</h2>
+  <p class="flow-text">Image: @Model.Data.Name</p>
+  <h3>Failed tasks</h3>
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+    @foreach (var task in Model.Data.Tasks.Where(t=>t.Result != "Passed"))
+    {
+      <tr>
+        <td><a href="/t/@task.Id">@task.Id</a></td>
+        <td>@task.Name</td>
+        <td>@task.Result</td>
+      </tr>
+    }
+    </tbody>
+  </table>
+</div>
