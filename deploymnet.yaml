@@ -1,0 +1,26 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: a01-report-front
+  labels:
+    system: a01
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: a01-report-front
+    spec:
+      containers:
+      - name: a01-report-front 
+        image: azureclidev.azurecr.io/a01report:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: A01_DB_URI
+          valueFrom:
+            secretKeyRef:
+              name: a01report
+              key: dburi
+      imagePullSecrets:
+      - name: azureclidev-acr
